@@ -35,7 +35,8 @@ server {
     location / {
         try_files $uri $uri/ /index.html;
     }
-}EOF
+}
+EOF
 
 # 暴露容器的 80 端口
 EXPOSE 80
