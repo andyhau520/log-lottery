@@ -23,20 +23,7 @@ FROM nginx:1.26
 COPY --from=0 /usr/src/app/dist /usr/share/nginx/html/
 
 # 创建自定义 nginx 配置
-RUN cat <<EOF > /etc/nginx/conf.d/default.conf
-server {
-    listen 80;
-    server_name localhost;
-
-    # Serve frontend static files
-    root /usr/share/nginx/html;
-    index index.html index.htm;
-    
-    location / {
-        try_files $uri $uri/ /index.html;
-    }
-}
-EOF
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # 暴露容器的 80 端口
 EXPOSE 80
