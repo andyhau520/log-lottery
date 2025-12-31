@@ -26,13 +26,13 @@ COPY --from=0 /usr/src/app/dist /usr/share/nginx/html/log-lottery
 RUN echo "server {\
     listen 80;\
     server_name localhost;\
+
+    # Serve frontend static files\
+    root /usr/share/nginx/html;\
+    index index.html index.htm;\
+    
     location / {\
-        return 301 /log-lottery/;\
-    }\
-    location /log-lottery {\
-        alias /usr/share/nginx/html/log-lottery;\
-        index index.html index.htm;\
-        try_files \$uri \$uri/ /log-lottery/index.html;\
+         try_files $uri $uri/ /index.html;\
     }\
 }" > /etc/nginx/conf.d/default.conf
 
