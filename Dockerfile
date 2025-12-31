@@ -20,7 +20,7 @@ RUN pnpm build
 FROM nginx:1.26
 
 # 复制自定义 nginx 配置
-COPY --from=0 /usr/src/app/dist /usr/share/nginx/html/
+COPY --from=0 /usr/src/app/dist /usr/share/nginx/html/log-lottery
 
 # 创建自定义 nginx 配置
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
