@@ -23,18 +23,7 @@ FROM nginx:1.26
 COPY --from=0 /usr/src/app/dist /usr/share/nginx/html/log-lottery
 
 # 创建自定义 nginx 配置
-RUN echo "server {\
-    listen 80;\
-    server_name localhost;\
-    location / {\
-        return 301 /log-lottery/;\
-    }\
-    location /log-lottery {\
-        alias /usr/share/nginx/html/log-lottery;\
-        index index.html index.htm;\
-        try_files \$uri \$uri/ /log-lottery/index.html;\
-    }\
-}" > /etc/nginx/conf.d/default.conf
+COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # 暴露容器的 80 端口
 EXPOSE 80
